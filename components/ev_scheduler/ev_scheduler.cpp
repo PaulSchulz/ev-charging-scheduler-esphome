@@ -1,10 +1,16 @@
 #include "ev_scheduler.h"
+#include "esphome/core/component.h"
 #include "esphome/core/log.h"
+#include "esphome/components/output/binary_output.h"
 
 namespace esphome {
     namespace ev_scheduler {
 
         static const char *TAG = "ev_scheduler";
+
+        // Constructor
+        //EVScheduler(Switch *relay_1, Switch *relay_2, Switch *relay_3, Switch *relay_4)
+        //: relay_1_(relay_1), relay_2_(relay_2), relay_3_(relay_3), relay_4_(relay_4) {}
 
         void EVScheduler::setup() {
             ESP_LOGD(TAG, "Scheduler initialized");
@@ -20,9 +26,9 @@ namespace esphome {
             }
         }
 
-        void EVScheduler::set_gpio_switches(std::vector<switch_::Switch *> switches) {
-            switches_ = switches;
-        }
+        //void EVScheduler::set_gpio_switches(std::vector<switch_::Switch *> switches) {
+        //switches_ = switches;
+        //}
 
         void EVScheduler::switch_jobs() {
             if (switches_.size() < 4) {

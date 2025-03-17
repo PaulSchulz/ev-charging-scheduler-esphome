@@ -25,29 +25,38 @@ packages:
 #############################################################################
   
 external_components:
+#  - source:
+#      type: git
+#      url: https://github.com/PaulSchulz/ev-charging-scheduler-esphome
+#      ref: master
   - source:
-      type: git
-      url: https://github.com/PaulSchulz/ev-charging-scheduler-esphome
-      ref: master
-
+      type: local
+      path: components
+    components: ["ev_scheduler"]
+      
 switch:
   - platform: gpio
-    pin: 18
+    pin: 34
     id: relay_1
+    name: Relay_1
   - platform: gpio
-    pin: 19
+    pin: 33
     id: relay_2
+    name: Relay_2
   - platform: gpio
-    pin: 21
+    pin: 47
     id: relay_3
+    name: Relay_3
   - platform: gpio
-    pin: 22
+    pin: 48
     id: relay_4
+    name: Relay_4
 
-ev_scheduler:
+ev_scheduler: 
   id: my_scheduler
-  switches:
-    - id: relay_1
-    - id: relay_2
-    - id: relay_3
-    - id: relay_4
+#  pin: 7
+#  switches:
+#    - id: relay_1
+#    - id: relay_2
+#    - id: relay_3
+#    - id: relay_4
