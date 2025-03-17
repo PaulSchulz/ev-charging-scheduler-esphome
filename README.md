@@ -81,5 +81,6 @@ logger:
 - [ ] Support **more than 4 relays**
 
 ---
+This ESPHome External Component was created with the assistance of ChatGPT
 
 This README gives clear **setup instructions**, **how the component works**, and potential **future features**. Would you like to add anything specific? 🚀
