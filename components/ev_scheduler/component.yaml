@@ -1,0 +1,47 @@
+# ev_scheduler component for EV Charging Scheduler
+name: "EV Charging Scheduler"
+documentation: "https://github.com/PaulSchulz/ev-charging-scheduler-esphome"
+
+# Configuration schema for the component
+dependencies:
+  - esphome: latest
+
+# Define the configuration options for the component
+# You can add more configuration options as needed
+config:
+  # List the switches (GPIO pins) that this component will control
+  - name: "Relay 1"
+    id: relay_1
+    pin: 18
+    platform: gpio
+  - name: "Relay 2"
+    id: relay_2
+    pin: 19
+    platform: gpio
+  - name: "Relay 3"
+    id: relay_3
+    pin: 21
+    platform: gpio
+  - name: "Relay 4"
+    id: relay_4
+    pin: 22
+    platform: gpio
+
+# Any additional platform-specific configurations (e.g., timers) can go here
+timer:
+  - id: scheduler_timer
+    period: 600s  # 10-minute interval to switch relays (for testing purposes)
+
+# Define the actions (e.g., controlling relays in the scheduler)
+actions:
+  - switch.turn_on: relay_1
+  - switch.turn_off: relay_2
+
+# Example platform-specific information about the component
+platforms:
+  - name: "ESP32"
+    id: esp32
+    supported: true
+
+# Optional: add a description for Home Assistant
+description: "An external component to schedule EV charging relays in a round-robin manner."
