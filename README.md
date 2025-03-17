@@ -1,5 +1,10 @@
 # **EV Charging Scheduler for ESPHome**
 
+*Work In Progress*
+
+(Use at you own risk and discretion. None of the code here should be considered
+to be in any sort of completed state. You have been warned.)
+
 ## **Overview**
 This is an **ESPHome external component** that schedules and controls **EV charging relays** in a **round-robin** fashion. It switches **two active relays** among four jobs **every 5 minutes**.
 
