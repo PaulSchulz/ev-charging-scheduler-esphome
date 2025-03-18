@@ -1,0 +1,83 @@
+globals:
+  - id: operating
+    type: bool
+    restore_value: "false"
+    initial_value: "false"
+
+button:
+  - platform: template
+    name: "Enable"
+    id: button_enable
+    on_press:
+      then:
+        - logger.log: Enable Pressed
+        - switch.toggle: operating_switch
+
+  - platform: template
+    name: "Button 1"
+    id: button_1
+    on_press:
+      - logger.log: Button 1 Pressed
+  - platform: template
+    name: "Button 2"
+    id: button_2
+    on_press:
+      - logger.log: Button 2 Pressed
+  - platform: template
+    name: "Button 3"
+    id: button_3
+    on_press:
+      - logger.log: Button 3 Pressed
+  - platform: template
+    name: "Button 4"
+    id: button_4
+    on_press:
+      - logger.log: Button 4 Pressed
+
+switch:
+  - platform: template
+    name: Operating Switch
+    id: operating_switch
+    turn_on_action:
+      then:
+        - lambda:
+            id(operating) = true;
+        - logger.log: "Operating On!"
+    turn_off_action:
+      then:
+        - lambda:
+            id(operating) = false;
+        - logger.log: "Operating Off!"
+    lambda:
+      if (id(operating)) {
+       return true;
+      } else {
+        return false;
+      }
+      
+  - platform: gpio
+    pin: 34
+    id: relay_1
+    name: Relay_1
+  - platform: gpio
+    pin: 33
+    id: relay_2
+    name: Relay_2
+  - platform: gpio
+    pin: 47
+    id: relay_3
+    name: Relay_3
+  - platform: gpio
+    pin: 48
+    id: relay_4
+    name: Relay_4
+
+ev_scheduler: 
+#  id: my_scheduler
+  switches:
+    - relay_1
+    - relay_2
+    - relay_3
+    - relay_4
+  active: operating_switch
+  schedule_interval: 20sec

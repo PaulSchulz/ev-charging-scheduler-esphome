@@ -22,12 +22,12 @@ packages:
   # mqtt:     !include common/mqtt.yaml
 
   ev_scheduler: !include ev_scheduler.yaml
-
+  
 #############################################################################
 external_components:
   - source:
-      type: git
-      url: https://github.com/PaulSchulz/ev-charging-scheduler-esphome
-      ref: master
-    refresh: 0s
+      type: local
+      path: components
     components: ["ev_scheduler"]
+
+
