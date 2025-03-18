@@ -34,7 +34,7 @@ namespace esphome {
 
             // Activate two jobs in round-robin order
             int job1 = jobIndex;
-            int job2 = (jobIndex + 1) % 4;
+            int job2 = (jobIndex + 1) % switches_.size;
 
             switches_[job1]->turn_on();
             switches_[job2]->turn_on();
