@@ -1,7 +1,7 @@
 #include "ev_scheduler.h"
 #include "esphome/core/component.h"
 #include "esphome/core/log.h"
-#include "esphome/components/output/binary_output.h"
+// #include "esphome/components/output/binary_output.h"
 
 namespace esphome {
     namespace ev_scheduler {
