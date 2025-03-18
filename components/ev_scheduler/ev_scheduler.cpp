@@ -10,15 +10,14 @@ namespace esphome {
 
         void EVScheduler::setup() {
             ESP_LOGD(TAG, "Scheduler initialized");
-            lastSwitchTime = millis();
+            last_switch_time_ = millis();
         }
 
         void EVScheduler::loop() {
             unsigned long now = millis();
-
-            if (now - lastSwitchTime >= SWITCH_INTERVAL) {
+            if (now - this->last_switch_time_ >= this->schedule_interval_) {
                 switch_jobs();
-                lastSwitchTime = now;
+                last_switch_time_ = now;
             }
         }
 

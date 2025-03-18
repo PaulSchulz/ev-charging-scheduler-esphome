@@ -16,13 +16,14 @@ namespace esphome {
 
             static const char *get_id();
             void add_switch(esphome::switch_::Switch *sw);
+            void set_schedule_interval(uint32_t interval) { schedule_interval_ = interval; }
+
         private:
             std::vector<esphome::switch_::Switch *> switches_;
 
-            unsigned long lastSwitchTime = 0;
+            unsigned long last_switch_time_ = 0;
             int jobIndex = 0;
-            // const unsigned long SWITCH_INTERVAL = 300000;  // 5 minutes
-            const unsigned long SWITCH_INTERVAL = 10000;  // 10 seconds
+            uint32_t schedule_interval_{300000};  // Default to 5 minutes in milliseconds
 
             void switch_jobs();
         };

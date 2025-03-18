@@ -27,8 +27,9 @@ packages:
 external_components:
 #  - source:
 #      type: git
-#      url: https://github.com/PaulSchulz/ev-charging-scheduler-esphome
+#      url: https://github.com/PaulSchulz/ev-charging-scheduler-esphome.git
 #      ref: master
+#    components: ["ev_scheduler"]
   - source:
       type: local
       path: components
@@ -84,7 +85,6 @@ switch:
         - lambda:
             id(operating) = false;
         - logger.log: "Operating Off!"
-
     lambda:
       if (id(operating)) {
        return true;
@@ -92,7 +92,6 @@ switch:
         return false;
       }
       
-
   - platform: gpio
     pin: 34
     id: relay_1
@@ -117,3 +116,4 @@ ev_scheduler:
     - relay_2
     - relay_3
     - relay_4
+  schedule_interval: 20sec
