@@ -8,10 +8,6 @@ namespace esphome {
 
         static const char *TAG = "ev_scheduler";
 
-        // Constructor
-        //EVScheduler(Switch *relay_1, Switch *relay_2, Switch *relay_3, Switch *relay_4)
-        //: relay_1_(relay_1), relay_2_(relay_2), relay_3_(relay_3), relay_4_(relay_4) {}
-
         void EVScheduler::setup() {
             ESP_LOGD(TAG, "Scheduler initialized");
             lastSwitchTime = millis();
@@ -25,10 +21,6 @@ namespace esphome {
                 lastSwitchTime = now;
             }
         }
-
-        //void EVScheduler::set_gpio_switches(std::vector<switch_::Switch *> switches) {
-        //switches_ = switches;
-        //}
 
         void EVScheduler::switch_jobs() {
             if (switches_.size() < 4) {
@@ -51,6 +43,10 @@ namespace esphome {
             ESP_LOGD(TAG, "Switching jobs: %d and %d", job1, job2);
 
             jobIndex = (jobIndex + 2) % 4;
+        }
+
+        void EVScheduler::add_switch(esphome::switch_::Switch *sw) {
+            switches_.push_back(sw);
         }
 
     }  // namespace ev_scheduler

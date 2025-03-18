@@ -14,18 +14,15 @@ namespace esphome {
             void setup() override;
             void loop() override;
 
-            // void set_gpio_switches(std::vector<switch_::Switch *> switches);
-
             static const char *get_id();
-            // static void config_schema(Config &config);
-
-
+            void add_switch(esphome::switch_::Switch *sw);
         private:
-            std::vector<switch_::Switch *> switches_;
+            std::vector<esphome::switch_::Switch *> switches_;
+
             unsigned long lastSwitchTime = 0;
             int jobIndex = 0;
             // const unsigned long SWITCH_INTERVAL = 300000;  // 5 minutes
-            const unsigned long SWITCH_INTERVAL = 30000;  // 30 seconds
+            const unsigned long SWITCH_INTERVAL = 10000;  // 10 seconds
 
             void switch_jobs();
         };

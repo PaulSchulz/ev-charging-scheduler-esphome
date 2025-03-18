@@ -5,20 +5,26 @@
 # from .ev_scheduler import EVChargingScheduler
 import esphome.codegen as cg
 import esphome.config_validation as cv
-from esphome import pins
-from esphome.components import output
-from esphome.const import CONF_ID, CONF_PIN
+from esphome.const import CONF_ID
+from esphome.components import switch
+
+AUTO_LOAD = ["switch"]
+CONF_SWITCHES = "switches"
 
 ev_scheduler_ns = cg.esphome_ns.namespace("ev_scheduler")
 EVScheduler = ev_scheduler_ns.class_("EVScheduler", cg.Component)
 
-CONFIG_SCHEMA = output.BINARY_OUTPUT_SCHEMA.extend(
+CONFIG_SCHEMA = cv.Schema(
     {
-        cv.Required(CONF_ID): cv.declare_id(EVScheduler),
+        cv.GenerateID(): cv.declare_id(EVScheduler),
+        cv.Required(CONF_SWITCHES): cv.ensure_list(cv.use_id(switch.Switch)),
     }
 ).extend(cv.COMPONENT_SCHEMA)
 
 async def to_code(config):
     var = cg.new_Pvariable(config[CONF_ID])
-    await output.register_output(var, config)
     await cg.register_component(var, config)
+
+    for conf in config[CONF_SWITCHES]:
+        sw = await cg.get_variable(conf)
+        cg.add(var.add_switch(sw))
