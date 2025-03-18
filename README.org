@@ -37,7 +37,7 @@ external_components:
   - source:
       type: git
       url: https://github.com/PaulSchulz/ev-charging-scheduler-esphome
-      ref: main
+      ref: master
 #+end_src
 
 *** Configure GPIO Relays
@@ -60,28 +60,27 @@ switch:
 #+end_src
 
 *** Enable the Scheduler
-Add the *scheduler component* and specify the relays it controls:
+Add the *ev_scheduler component* and specify the relays it controls:
 
 #+begin_src yaml
-ev_scheduler:
-  id: my_scheduler
-  switches:
-    - id: relay_1
-    - id: relay_2
-    - id: relay_3
-    - id: relay_4
+  ev_scheduler:
+    active: operating_switch
+    schedule_interval: 20sec
+    switches:
+      - relay_1
+      - relay_2
+      - relay_3
+      - relay_4
 #+end_src
 
 ** How It Works
 - At *startup*, the scheduler initializes and starts *switching jobs*.
-- Every *5 minutes*, it *turns off all relays* and *activates the next two* in sequence.
-- The *cycle repeats indefinitely* unless overridden manually in Home Assistant.
+- Every *schedule_interval* (defaults to 5 minutes), it *turns off all relays* and
+  *activates the next two* in sequence.
+- The *cycle repeats indefinitely* unless overridden manually.
 
 ** Customization
-Modify the *switching interval* in `ev_scheduler.cpp`:
-#+begin_src cpp
-const unsigned long SWITCH_INTERVAL = 300000;  // Default: 5 minutes
-#+end_src
+Please let me know if there is any behavior that you think should be added.
 
 ** Logs & Debugging
 Enable logging to see scheduler status:
@@ -92,11 +91,12 @@ logger:
 #+end_src
 
 ** Home Assistant Integration
-- Manually override *relays* in Home Assistant using `switch.toggle`.
-- Automate scheduling based on *solar availability* or *grid pricing*.
+With the *Home Assistant* API active, an ESP device programmed with ESPHome will
+be automatically detected in Home Assistant, where it can be controlled and
+managed.
 
 ** Future Improvements
-- [ ] Make the switch interval *configurable in YAML*
+- [X] Make the switch interval *configurable in YAML* (See schedule_interval)
 - [ ] Add *Home Assistant services* for manual control
 - [ ] Support *more than 4 relays*
 
