@@ -56,19 +56,19 @@ switch:
       }
       
   - platform: gpio
-    pin: 34
+    pin: 1
     id: relay_1
     name: Relay_1
   - platform: gpio
-    pin: 33
+    pin: 2
     id: relay_2
     name: Relay_2
   - platform: gpio
-    pin: 47
+    pin: 3
     id: relay_3
     name: Relay_3
   - platform: gpio
-    pin: 48
+    pin: 4
     id: relay_4
     name: Relay_4
 
