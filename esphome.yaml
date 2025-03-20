@@ -1,5 +1,5 @@
 esphome:
-  name: ev-charger
+  name: evcs
 
 esp32:
 #  board: esp32-s3-devkitc-1

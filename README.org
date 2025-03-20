@@ -13,6 +13,7 @@ The follow README has been produced with the assistance of ChatGPT (March 2025)
   - [[#features][Features]]
   - [[#installation][Installation]]
   - [[#how-it-works][How It Works]]
+  - [[#examples][Examples]]
   - [[#customization][Customization]]
   - [[#logs--debugging][Logs & Debugging]]
   - [[#home-assistant-integration][Home Assistant Integration]]
@@ -46,16 +47,16 @@ Define *four GPIO switches* for relay control:
 #+begin_src yaml
 switch:
   - platform: gpio
-    pin: 18
+    pin: 1
     id: relay_1
   - platform: gpio
-    pin: 19
+    pin: 2
     id: relay_2
   - platform: gpio
-    pin: 21
+    pin: 3
     id: relay_3
   - platform: gpio
-    pin: 22
+    pin: 4
     id: relay_4
 #+end_src
 
@@ -78,6 +79,16 @@ Add the *ev_scheduler component* and specify the relays it controls:
 - Every *schedule_interval* (defaults to 5 minutes), it *turns off all relays* and
   *activates the next two* in sequence.
 - The *cycle repeats indefinitely* unless overridden manually.
+
+** Examples
+There are examples YAML file with the following dependencies: 
+
+EV Charging Scheduler
+- evcs-xxxxxx.yaml : Specific configuration file for a specific board
+  (identified with MAC address). Useful for Over the Air (OTA) programming.
+  - esphome-evcs.yaml : General example configuration. Use this first. 
+    - ev_scheduler.yaml : Core functionality of the EV Scheduler component.
+    - common/*.yaml  : Support for other subsystems.
 
 ** Customization
 Please let me know if there is any behavior that you think should be added.
