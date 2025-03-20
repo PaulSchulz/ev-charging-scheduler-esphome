@@ -1,0 +1,10 @@
+substitutions:
+  relay_id: "1"
+
+esphome:
+  name: evcp
+  name_add_mac_suffix: true
+
+packages:
+  ev-charger: !include esphome-evcp.yaml
+
